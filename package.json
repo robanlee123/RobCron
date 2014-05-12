@@ -1,0 +1,30 @@
+{
+  "name": "RobNodeCron",
+  "version": "0.1.0",
+  "description": "Nodejs crontab",
+  "homepage": "https://github.com/robanlee123/robCron",
+  "keywords": [
+    "nodejs",
+    "rob",
+    "cron",
+    "redis"
+  ],
+  "author": {
+    "name": "Roban Lee",
+    "email": "Robanlee@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robanlee123/robCron"
+  },
+  "dependencies": {
+    "redis": "0.7.2"
+  },
+  "main": "index",
+  "readme":"",
+  "readmeFilename": "Readme.md",
+  "_id": "robCron@0.1.0",
+  "dist": {
+    "shasum": ""
+  }
+}
