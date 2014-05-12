@@ -10,7 +10,8 @@ Data structrue in this project
 
 Dependencies
 -------------------------------------------
-Redis lib, run code to install :
+Redis lib, run code to install :<br/>
+
 npm install redis
 
 
@@ -24,4 +25,5 @@ Configrations
 Start!
 -------------------------------------------
 run code:
+<br/>
 node index.js
