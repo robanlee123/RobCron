@@ -31,6 +31,5 @@ node index.js
 About author
 -------------------------------------------
 Roban lee (robanlee at gmail dot com) <br/>
-PHPer,NodeJS,Javascript,Python,Java ...  
-<br/>
-+ with 7+ years development expirence <br/>
++ PHPer,NodeJS,Javascript,Python,Java ...  
++ Over 7+ years development expirence <br/>
