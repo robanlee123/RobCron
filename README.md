@@ -8,6 +8,10 @@ Data structrue in this project
 'schedule_timeout' : 60
 }
 
+Dependencies
+-------------------------------------------
+Redis lib, run code to install :
+npm install redis
 
 
 Configrations
