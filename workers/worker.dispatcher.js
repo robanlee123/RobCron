@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-var redisObject = require('../lib/lib.redis').redisObject;
+var redisObject = require(__dirname+'/../lib/lib.redis').redisObject;
 var parser = require(__dirname + '/../lib/lib.parser.js');
 var rdo = new redisObject();
 
