@@ -136,7 +136,10 @@ var exec = require('child_process').exec;
 
 		rdo.getTaskID(function(taskID) {
 			taskInfo.task_id = taskID;
-			rdo.modifyTask(taskID, taskInfo, fn);
+			rdo.setScheduleTask(scheduleInfo.schedule_id,taskID,function(){
+				rdo.modifyTask(taskID, taskInfo, fn);
+			});
+			
 		});
 	};
 
