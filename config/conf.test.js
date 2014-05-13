@@ -7,8 +7,9 @@ exports = module.exports = config = {
 		maxID: 'rob:schedule:maxID',
 		ids: 'rob:schedule:ids',
 		scheduleInfo: 'rob:schedule:%s',
-		tmTask:'rob:schedule:runat:%s',
-		taskID: 'rob:schedule:task:%s'
+		tmTask: 'rob:schedule:runat:%s',
+		taskID: 'rob:schedule:task:%s',
+		taskInfo: 'rob:schedule:task:info:%s'
 	}
 
 }

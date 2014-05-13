@@ -28,8 +28,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-var redisObject = require(__dirname+'/../lib/lib.redis').redisObject;
+var redisObject = require(__dirname + '/../lib/lib.redis').redisObject;
 var parser = require(__dirname + '/../lib/lib.parser.js');
+var tool = require(__dirname + '/../lib/lib.tool.js');
 var rdo = new redisObject();
 var fs = require('fs');
 var util = require('util');
@@ -58,10 +59,10 @@ var exec = require('child_process').exec;
 	processor.prototype.getJob = function() {
 		var self = this;
 		rdo.fetchJobByTime(undefined, function(data) {
-			if (! data  ) {
+			if (!data) {
 				return false;
 			}
- 		 
+
 			self.runJob(data);
 
 			process.nextTick(function() {
@@ -79,28 +80,66 @@ var exec = require('child_process').exec;
 	processor.prototype.runJob = function(data) {
 		var day = new Date().format('yyyy-MM-dd');
 		var path = __dirname + '/../logs/' + day;
+		var self = this;
+
+		//create log path by date
 		if (!fs.existsSync(path)) {
 			fs.mkdirSync(path);
 		}
 
-		rdo.getTaskID(function(taskID) {
+		//create task 
+		var taskInfo = {
+			task_name: data.schedule_name,
+			schedule_id: data.schedule_id
+		};
+
+		this.createTask(taskInfo, function(response) {
+			if (!response) {
+				console.cerr('Failed to create task!');
+				return false;
+			}
+
 			var command = data.schedule_params;
-			command = util.format('%s > %s/../logs/%s/RobCron-log-%s-%s.log 2>&1', command, __dirname, day, data.schedule_id, taskID);
+			command = util.format('%s > %s/../logs/%s/RobCron-log-%s-%s.log 2>&1', command, __dirname, day, data.schedule_id, response.task_id);
 			console.clog('Command:' + command);
 
 			//Log details to console
-			console.clog(util.format('Processing Detail:Task id:%s of job:%s', taskID, data.schedule_id));
+			console.clog(util.format('Processing Detail:Task id:%s of job:%s', response.task_id, data.schedule_id));
 
 			var timeout = data.schedule_timeout || 60;
 			var commandOptions = {timeout: timeout * 1000, maxBuffer: 1024 * 1024 * 100, killSignal: 'SIGHUP'};
 			var cmd = exec(command, commandOptions);
 			cmd.on('exit', function(code) {
-				console.clog('Response code: ' + code);
+				var taskEndInfo = {
+					task_status: 1,
+					task_end: Date.now().toString().substring(0, 10),
+					task_exit_code: code
+				};
+				self.endTask(response.task_id, taskEndInfo, function() {
+					console.clog( util.format('Task:%s of schedule %s has been done,code is: %s',response.task_id,data.schedule_id,code) );
+				});
 			});
+
+		});
+	};
+
+	processor.prototype.endTask = function(taskID, taskData, fn) {
+		rdo.modifyTask(taskID, taskData, fn);
+	};
+
+	processor.prototype.createTask = function(scheduleInfo, fn) {
+		var taskInfo = tool.merge(scheduleInfo, {
+			task_start: Date.now().toString().substring(0, 10),
+			task_status: 0,
+			task_created: Date.now().toString().substring(0, 10)
 		});
 
-
+		rdo.getTaskID(function(taskID) {
+			taskInfo.task_id = taskID;
+			rdo.modifyTask(taskID, taskInfo, fn);
+		});
 	};
+
 
 
 
