@@ -15,13 +15,13 @@ Redis lib, run code to install :<br/>
 npm install redis
 
 
-Configrations
+Configurations
 -------------------------------------------
 
 1. change your enviroment by edit env.js 
 2. find configuration file undef config and edit redis host & post
 3. run: node ./benches/addJob.js  to adding a new job
-	u
+	
 Start!
 -------------------------------------------
 run code:
