@@ -58,10 +58,10 @@ var exec = require('child_process').exec;
 	processor.prototype.getJob = function() {
 		var self = this;
 		rdo.fetchJobByTime(undefined, function(data) {
-			if (null == data) {
+			if (! data  ) {
 				return false;
 			}
-
+		 
 			self.runJob(data);
 
 			process.nextTick(function() {
