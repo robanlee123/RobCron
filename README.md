@@ -1,12 +1,26 @@
 Data structrue in this project
 -------------------------------------------
-{
-'schedule_name' : 'scheduleName',
-'schedule_id' : 1,
-'schedule_rule' : '* * * * * ',
-'schedule_params' : 'php test.php',
-'schedule_timeout' : 60
++ schedule job
+{<br/>
+	'schedule_name' : 'scheduleName',<br/>
+	'schedule_id' : 1,<br/>
+	'schedule_rule' : '* * * * * ',<br/>
+	'schedule_params' : 'php test.php',<br/>
+	'schedule_timeout' : 60<br/>
 }
++ task
+ {<br/>
+	'task_name': 'scheduleName',<br/>
+	'schedule_id': '5',<br/>
+	'task_start': '1399950000',<br/>
+	'task_status': '1',<br/>
+	'task_created': '1399950000',<br/>
+	'task_id': '77',<br/>
+	'task_end': '1399950000',<br/>
+	'task_exit_code': '1'<br/>
+}
+
+
 
 Dependencies
 -------------------------------------------
