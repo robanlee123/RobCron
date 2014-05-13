@@ -61,7 +61,7 @@ var exec = require('child_process').exec;
 			if (! data  ) {
 				return false;
 			}
-		 
+ 		 
 			self.runJob(data);
 
 			process.nextTick(function() {
